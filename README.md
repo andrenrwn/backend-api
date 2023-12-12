@@ -81,13 +81,37 @@ Pick one:
 
 ## Use Cases and Testing
 
+You can pre-populate the database for testing:
+
+```$npm run seed```
+
+or
+
+```$node seeds/index.js```
+
+### Text User Interface
+
+![tui.js](img/ecommerce_db_tui.png "E-Commerce DB TUI")
+
+You can run the following provided TUI (text user interface) script to test the API:
+
+```$ node bin/tui.js```
+
+or 
+
+```$ npm run test```
+
+### Insomnia
+
 [Insomnia](https://insomnia.rest/): Load and use the following [Insomnia](https://insomnia.rest/) collection to interface with the API:
 
-[Insomnia Collection](test/Insomnia_routes.json)
+[Insomnia Collection: Insomnia_routes.json](test/Insomnia_routes.json)
+
+### API Inspection in Browser
 
 Chrome/Firefox browsers: Observe the API calls and its examples by loading this .HAR file into your browser's debug interface (F12):
 
-[Insomnia_walkthrough.har](test/Insomnia_walkthrough.har)
+[.HAR file: Insomnia_walkthrough.har](test/Insomnia_walkthrough.har)
 
 ## License
 
@@ -105,5 +129,6 @@ The following are the npm dependencies of this application:
 Dev dependencies: 
 
 - jsdoc-to-markdown - generate a markdown version of the in-code documentation (used to render API.md)
+- blessed           - Used by tui.js text example client
 
 
