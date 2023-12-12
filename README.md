@@ -28,6 +28,7 @@ Pick one:
 
 ## API Reference
 
+Click here for the full API documentation:
 [API Reference](API.md)
 
 <dl>
@@ -100,6 +101,13 @@ You can run the following provided TUI (text user interface) script to test the 
 or 
 
 ```$ npm run test```
+
+### Walkthrough videos
+
+Click here to get the full list of walkthrough videos demonstrating this app:
+
+[Walkthrough videos](WALKTHROUGH.md)
+
 
 ### Insomnia
 

@@ -38,6 +38,9 @@ router.get('/:id', async (req, res) => {
   let category;
   try {
     category = await Category.findOne({
+      where: {
+        id: req.params.id,
+      },
       include: [{
         model: Product,
         // required: true
