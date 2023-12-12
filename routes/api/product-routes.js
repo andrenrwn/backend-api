@@ -7,8 +7,7 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 /**
  * @name GET /api/products
  * @description Gets all products, including their associated Category and Tag data
- * @memberof path:/api/products
- * @returns {ARRAY of JSON object literals|err JSON error message} array of all products | error from sequelize if failed
+ * @returns {ARRAY|JSON} array of JSON objects of all products | error in JSON from sequelize if failed
  */
 router.get('/', async (req, res) => {
   // find all products
@@ -38,9 +37,8 @@ router.get('/', async (req, res) => {
 /**
  * @name GET /api/products/:id
  * @description Get one product, including its associated Category and Tag data
- * @memberof path:/api/products
  * @param {INTEGER} :id is the product id specified at the end of the URI path
- * @returns {JSON object literal|err JSON error message} JSON object literal of the specified product | error from sequelize if failed
+ * @returns {JSON} JSON object literal of the specified product | error in JSON from sequelize if failed
   */
 router.get('/:id', async (req, res) => {
   // find a single product by its `id`
@@ -76,13 +74,13 @@ router.get('/:id', async (req, res) => {
 /**
  * @name POST /api/products
  * @description Create a new product in the database, including its associated Category and Tag data.
- * @memberof path:/api/products
  * @param {JSON} req.body JSON object literals in the POST HTTP body containing the following key/value pairs:
  * @param {STRING} product_name The new product name (must be unique in the database)
  * @param {DECIMAL} price listed price of the product
  * @param {INTEGER} stock number of items left in stock
  * @param {INTEGER} category_id specifies the category identifier of the product
  * @param {ARRAY} tagIds An array of INTEGER tag IDs. ie. If a product has white (tag ID:1) and blue (tag ID: 5), it becomes: "tagId": [1,5]
+ * @returns {{JSON,ARRAY}} JSON object returning the newly created product {{ "id": "<newid>", "product_name": <new category name>", ... }, ARRAY } and ARRAY JSON tag objects that was created | error in JSON indicating what went wrong from sequelize
  */
 router.post('/', async (req, res) => {
   /* req.body should look like this...
@@ -103,7 +101,7 @@ router.post('/', async (req, res) => {
       category_id: req.body.category_id
     });
   } catch (err) {
-    console.log(err);
+    console.log(err); // debug logs
     res.status(400).json(err);
     return false;
   };
@@ -122,7 +120,7 @@ router.post('/', async (req, res) => {
     try {
       await ProductTag.bulkCreate(productTagIdArr);
     } catch (err) {
-      console.log(err);
+      console.log(err); // debug logs
       res.status(400).json(err);
       return false;
     };
@@ -134,7 +132,6 @@ router.post('/', async (req, res) => {
 /**
  * @name PUT /api/products/:id
  * @description Update product, including its associated Category and Tag data. Tags data is updated after.
- * @memberof path:/api/products
  * @param {INTEGER} :id is the product id specified at the end of the URI path. ie. /api/products/23
  * 
  * @param {JSON} req.body JSON object literals in the POST HTTP body containing the following key/value pairs:
@@ -144,7 +141,8 @@ router.post('/', async (req, res) => {
  * @param {INTEGER} stock number of items left in stock
  * @param {INTEGER} category_id specifies the category identifier of the product
  * @param {ARRAY} tagIds An array of INTEGER tag IDs. ie. If a product has white (tag ID:1) and blue (tag ID: 5), it becomes: "tagId": [1,5]
- */
+ * @returns {JSON} "message": indicating how many successful product and tag entries were updated | err message indicating what went wrong from sequelize.
+ *                     0 updated entries mean no entry was not updated. */
 router.put('/:id', async (req, res) => {
   // update product data
 
@@ -211,8 +209,9 @@ router.put('/:id', async (req, res) => {
 /**
  * @name DELETE /api/products/:id
  * @description Delete product entry specified by :id.
- * @memberof path:/api/products
  * @param {INTEGER} :id is the product id specified at the end of the URI path. ie. /api/products/23
+ * @returns {JSON} "message": indicating how many successful product entries were deleted | err message indicating what went wrong from sequelize.
+ *                 0 deleted entries means no entry were deleted.
  */
 router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value

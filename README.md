@@ -8,7 +8,7 @@ This repository demonstrates an implementation of a backend API for an e-commerc
 
 ## Repository
 
-[https://github.com/andrenrwn/employeetracker](https://github.com/andrenrwn/employeetracker)
+[https://github.com/andrenrwn/ecommerce_db-api](https://github.com/andrenrwn/ecommerce_db-api)
 
 ## Installation
 
@@ -18,123 +18,76 @@ This repository demonstrates an implementation of a backend API for an e-commerc
 
 ## Usage
 
-Local run:
+Pick one:
 
-```$ node index.js```
+```$ node server.js```
+```$ npm run start```
 
-### Main Menu
+```$ nodemon server.js```
+```$ npm run watch```
 
-The program presents the user with the following options.
+## API Reference
 
-![Employee Tracker Main Menu](img/main_menu.png)
+[API Reference](API.md)
 
-Use the up and down arrow to select an option.
-Press <enter> to select.
-
-A <cancel> selection will back out to the main menu.
-
-Selecting quit will exit the program.
-
-### View Department
-
-View all departments.
-
-![View all departments](img/01_view_departments.png)
-
-### View Department Employees
-
-Select a department to view that department's employees.
-
-![View Department Employees](img/02_view_department_employees.png)
-
-### View the personnel budget of each department 
-
-View the sum of all salaries of employees that belong to each department.
-The table also displays an employee count of each department.
-
-![View department employee budget report](img/03_view_department_employee_budget.png)
-
-### Add a department
-
-Enter the department's name when prompted.
-
-![Add a department](img/04_add_department.png)
-
-### Delete a department
-
-![Delete a department](img/05_delete_department.png)
-
-### View All Roles
-
-View all employee titles (roles)
-
-![View all roles](img/06_view_roles.png)
-
-### Add Role
-
-Add an employee role (title), 
-enter the role's salary,
-then select a department that hosts that role.
-
-![Add role](img/07_add_role.png)
-
-Salary only accepts numeric entries.
-
-![Salary is numeric](img/07_add_role_validation.png)
-
-### Delete Role
-
-Select a role to delete it.
-If an employee is currently assigned the deleted role, the employee's role will be NULL.
-
-![Delete a role](img/08_delete_role.png)
-
-### View Employees
-
-Views all employees, their roles, salaries, and manager (if assigned).
-
-![View Employees](img/09_view_employees.png)
-
-### View Employees by Manager
-
-View all employees, sorted by their manager in charge.
-An employee can have multiple managers, in which case that employee will be displayed twice in the table so all their managers can be displayed.
-
-![View Employees by Manager](img/10_view_employees_by_manager.png)
-
-### View Manager Direct Reports
-
-Select a manager to view their direct reports.
-
-![Select and view a manager's direct reports](img/11_view_manager_direct_reports.png)
-
-### Add Employee
-
-Add an employee.
-Enter their first name, last name, and select their work role.
-
-![Add Employee](img/12_add_employee.png)
-
-### Update Employee Role
-
-Update the employee's role.
-Select the employee to update, then select a new role for that employee.
-
-![Update employee Role](img/13_update_employee_role.png)
-
-### Modify Employee Manager
-
-You can assign a new manager to an employee, or remove the manager assignment from an employee.
-
-![Modify Employee Manager](img/14_modify_employee_manager.png)
-
-### Delete Employee
-
-You can also delete an employee from the database.
-
-![Delete Employee](img/15_delete_employee.png)
+<dl>
+<dt><a href="API.md#GET /api/categories">GET /api/categories</a> ⇒ <code>ARRAY</code> | <code>JSON</code></dt>
+<dd><p>Gets all categories, each including all its associated Products</p>
+</dd>
+<dt><a href="API.md#GET /api/categories/_id">GET /api/categories/:id</a> ⇒ <code>JSON</code></dt>
+<dd><p>Get one category, including its associated list of products</p>
+</dd>
+<dt><a href="API.md#POST /api/categories">POST /api/categories</a> ⇒ <code>JSON</code> | <code>err</code></dt>
+<dd><p>Create a new category in the database. A new category id is created if successful.</p>
+</dd>
+<dt><a href="API.md#PUT /api/categories/_id">PUT /api/categories/:id</a> ⇒ <code>JSON</code> | <code>err</code></dt>
+<dd><p>Update an exsting category, based on the specified category :id</p>
+</dd>
+<dt><a href="API.md#DELETE /api/categories/_id">DELETE /api/categories/:id</a> ⇒ <code>JSON</code> | <code>err</code></dt>
+<dd><p>Delete category entry specified by :id.</p>
+</dd>
+<dt><a href="API.md#GET /api/products">GET /api/products</a> ⇒ <code>ARRAY</code> | <code>JSON</code></dt>
+<dd><p>Gets all products, including their associated Category and Tag data</p>
+</dd>
+<dt><a href="API.md#GET /api/products/_id">GET /api/products/:id</a> ⇒ <code>JSON</code></dt>
+<dd><p>Get one product, including its associated Category and Tag data</p>
+</dd>
+<dt><a href="API.md#POST /api/products">POST /api/products</a> ⇒ <code>Object</code></dt>
+<dd><p>Create a new product in the database, including its associated Category and Tag data.</p>
+</dd>
+<dt><a href="API.md#PUT /api/products/_id">PUT /api/products/:id</a> ⇒ <code>JSON</code></dt>
+<dd><p>Update product, including its associated Category and Tag data. Tags data is updated after.</p>
+</dd>
+<dt><a href="API.md#DELETE /api/products/_id">DELETE /api/products/:id</a> ⇒ <code>JSON</code></dt>
+<dd><p>Delete product entry specified by :id.</p>
+</dd>
+<dt><a href="API.md#GET /api/tags">GET /api/tags</a> ⇒ <code>ARRAY</code> | <code>JSON</code></dt>
+<dd><p>Gets all tags, each including all its associated Products</p>
+</dd>
+<dt><a href="API.md#GET /api/tags/_id">GET /api/tags/:id</a> ⇒ <code>JSON</code></dt>
+<dd><p>Get one tag, including its associated list of products</p>
+</dd>
+<dt><a href="API.md#POST /api/tags">POST /api/tags</a> ⇒ <code>JSON</code></dt>
+<dd><p>Create a new category in the database. A new category id is created if successful.</p>
+</dd>
+<dt><a href="API.md#PUT /api/tags/_id">PUT /api/tags/:id</a> ⇒ <code>JSON</code></dt>
+<dd><p>Update an exsting category, based on the specified category :id</p>
+</dd>
+<dt><a href="API.md#DELETE /api/tags/_id">DELETE /api/tags/:id</a> ⇒ <code>JSON</code></dt>
+<dd><p>Delete tag entry specified by :id.</p>
+</dd>
+</dl>
 
 
+## Use Cases and Testing
+
+[Insomnia](https://insomnia.rest/): Load and use the following [Insomnia](https://insomnia.rest/) collection to interface with the API:
+
+[Insomnia Collection](test/Insomnia_routes.json)
+
+Chrome/Firefox browsers: Observe the API calls and its examples by loading this .HAR file into your browser's debug interface (F12):
+
+[Insomnia_walkthrough.har](test/Insomnia_walkthrough.har)
 
 ## License
 
@@ -144,10 +97,13 @@ You can also delete an employee from the database.
 
 The following are the npm dependencies of this application:
 
-- inquirer  : https://github.com/SBoudrias/Inquirer.js
-- mysql2    : https://github.com/sidorares/node-mysql2
-- cli-table : https://github.com/Automattic/cli-table
-- colors    : https://github.com/Qix-/color
+- dotenv    : Use environment variables for configuring database credentials
+- express   : Web server middleware for NodeJS
+- mysql2    : NodeJS interface to MySQL
+- sequelize : ORM to help with Javascript coding of model relational models (SQL)
 
-Ideas and code patterns are provided from the UT Austin Coding Bootcamp challenges.
+Dev dependencies: 
+
+- jsdoc-to-markdown - generate a markdown version of the in-code documentation (used to render API.md)
+
 

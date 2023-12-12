@@ -17,7 +17,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "latest"
+    "jsdoc": "latest",
+    "jsdoc-to-markdown": "^8.0.0"
   },
   "dependencies": {
     "dotenv": "latest",
