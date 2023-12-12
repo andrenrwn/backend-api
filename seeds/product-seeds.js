@@ -31,6 +31,12 @@ const productData = [
     stock: 22,
     category_id: 2,
   },
+  {
+    product_name: 'Totoro Plushie',
+    price: "39.99",
+    stock: 8,
+    category_id: 6,
+  },
 ];
 
 const seedProducts = () => Product.bulkCreate(productData);
