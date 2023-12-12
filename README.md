@@ -6,15 +6,18 @@
 
 This repository demonstrates an implementation of a backend API for an e-commerce application. The database uses Sequelize as the ORM (Object-Relational Mapping) tool front-end to MySQL and expressJS to serve as the middleware webserver.
 
+
 ## Repository
 
 [https://github.com/andrenrwn/ecommerce_db-api](https://github.com/andrenrwn/ecommerce_db-api)
+
 
 ## Installation
 
 - nodeJS (if not yet installed)
 - clone this repository
 - npm install
+
 
 ## Usage
 
@@ -25,6 +28,14 @@ Pick one:
 
 ```$ nodemon server.js```
 ```$ npm run watch```
+
+
+## Walkthrough videos
+
+Click here to get the full list of walkthrough videos demonstrating this app:
+
+[Walkthrough videos](WALKTHROUGH.md)
+
 
 ## API Reference
 
@@ -101,12 +112,6 @@ You can run the following provided TUI (text user interface) script to test the 
 or 
 
 ```$ npm run test```
-
-### Walkthrough videos
-
-Click here to get the full list of walkthrough videos demonstrating this app:
-
-[Walkthrough videos](WALKTHROUGH.md)
 
 
 ### Insomnia
