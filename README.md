@@ -34,7 +34,7 @@ Pick one:
 
 Click here to get the full list of walkthrough videos demonstrating this app:
 
-[Walkthrough videos](WALKTHROUGH.md)
+[![Walkthrough videos](img/video.png 'Walkthrough videos')](WALKTHROUGH.md)
 
 
 ## API Reference
