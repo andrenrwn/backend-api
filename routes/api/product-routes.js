@@ -3,7 +3,13 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
 
-// get all products
+
+/**
+ * @name GET /api/products
+ * @description Gets all products, including their associated Category and Tag data
+ * @memberof path:/api/products
+ * @returns {ARRAY of JSON object literals|err JSON error message} array of all products | error from sequelize if failed
+ */
 router.get('/', async (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
@@ -29,7 +35,13 @@ router.get('/', async (req, res) => {
   res.status(200).json(product_all);
 });
 
-// get one product
+/**
+ * @name GET /api/products/:id
+ * @description Get one product, including its associated Category and Tag data
+ * @memberof path:/api/products
+ * @param {INTEGER} :id is the product id specified at the end of the URI path
+ * @returns {JSON object literal|err JSON error message} JSON object literal of the specified product | error from sequelize if failed
+  */
 router.get('/:id', async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
@@ -61,7 +73,17 @@ router.get('/:id', async (req, res) => {
   res.status(200).json(a_product);
 });
 
-// create new product
+/**
+ * @name POST /api/products
+ * @description Create a new product in the database, including its associated Category and Tag data.
+ * @memberof path:/api/products
+ * @param {JSON} req.body JSON object literals in the POST HTTP body containing the following key/value pairs:
+ * @param {STRING} product_name The new product name (must be unique in the database)
+ * @param {DECIMAL} price listed price of the product
+ * @param {INTEGER} stock number of items left in stock
+ * @param {INTEGER} category_id specifies the category identifier of the product
+ * @param {ARRAY} tagIds An array of INTEGER tag IDs. ie. If a product has white (tag ID:1) and blue (tag ID: 5), it becomes: "tagId": [1,5]
+ */
 router.post('/', async (req, res) => {
   /* req.body should look like this...
     {
@@ -109,7 +131,20 @@ router.post('/', async (req, res) => {
   res.status(200).json({ product, productTags });
 });
 
-// update product
+/**
+ * @name PUT /api/products/:id
+ * @description Update product, including its associated Category and Tag data. Tags data is updated after.
+ * @memberof path:/api/products
+ * @param {INTEGER} :id is the product id specified at the end of the URI path. ie. /api/products/23
+ * 
+ * @param {JSON} req.body JSON object literals in the POST HTTP body containing the following key/value pairs:
+ * 
+ * @param {STRING} product_name The new product name (must be unique in the database)
+ * @param {DECIMAL} price listed price of the product
+ * @param {INTEGER} stock number of items left in stock
+ * @param {INTEGER} category_id specifies the category identifier of the product
+ * @param {ARRAY} tagIds An array of INTEGER tag IDs. ie. If a product has white (tag ID:1) and blue (tag ID: 5), it becomes: "tagId": [1,5]
+ */
 router.put('/:id', async (req, res) => {
   // update product data
 
@@ -173,6 +208,12 @@ router.put('/:id', async (req, res) => {
   return true;
 });
 
+/**
+ * @name DELETE /api/products/:id
+ * @description Delete product entry specified by :id.
+ * @memberof path:/api/products
+ * @param {INTEGER} :id is the product id specified at the end of the URI path. ie. /api/products/23
+ */
 router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
 
