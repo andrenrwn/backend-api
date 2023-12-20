@@ -4,16 +4,27 @@ const { Tag, Product, ProductTag } = require('../../models');
 // The `/api/tags` endpoint
 
 /**
- * @name GET /api/tags
+ * @name GET /api/tags?order={ASC|DESC}
  * @description Gets all tags, each including all its associated Products
+ * @param {STRING} ?order = 'ASC'|'DESC' --- based on order of the string. Default: 'DESC'
  * @returns {ARRAY|JSON} array of all JSON tag objects including their associated products | error from sequelize if failed
  */
 router.get('/', async (req, res) => {
+  // validate GET query parameter for ordering
+  let order = 'ASC'; // default
+  if (req.query.hasOwnProperty('order') && req.query.order.toUpperCase() === 'DESC') {
+    order = 'DESC';
+  };
+
   // find all tags
   // be sure to include its associated Product data
   let tags_all;
   try {
     tags_all = await Tag.findAll({
+      order: [
+        ['tag_name', order],
+        [Product, 'product_name', order]
+      ],
       include: [{
         model: Product,
         // required: true

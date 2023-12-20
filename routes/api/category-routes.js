@@ -4,16 +4,32 @@ const { Category, Product } = require('../../models');
 // The `/api/categories` endpoint
 
 /**
- * @name GET /api/categories
+ * @name GET /api/categories?order={DESC|ASC}
  * @description Gets all categories, each including all its associated Products
+ * @param {STRING} ?order = 'ASC'|'DESC' --- based on order of the string. Default: 'DESC'
  * @returns {ARRAY|JSON} array of all JSON categories objects including their products | error from sequelize if failed
  */
 router.get('/', async (req, res) => {
+
+  // validate GET query parameter for ordering
+  let order = 'ASC'; // default
+  if (req.query.hasOwnProperty('order')) {
+    if (req.query.order.toUpperCase() === 'ASC') {
+      order = 'ASC';
+    } else if (req.query.order.toUpperCase() === 'DESC') {
+      order = 'DESC';
+    };
+  };
+
   // find all categories
   // including its associated Products
   let categories_all;
   try {
     categories_all = await Category.findAll({
+      order: [
+        ['category_name', order],
+        [Product, 'product_name', order]
+      ],
       include: [{
         model: Product,
         // required: true

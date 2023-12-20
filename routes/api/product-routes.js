@@ -5,16 +5,29 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 
 /**
- * @name GET /api/products
+ * @name GET /api/products?order={ASC|DESC}
  * @description Gets all products, including their associated Category and Tag data
+ * @param {STRING} ?order = 'ASC'|'DESC' --- based on order of the string. Default: 'DESC'
  * @returns {ARRAY|JSON} array of JSON objects of all products | error in JSON from sequelize if failed
  */
 router.get('/', async (req, res) => {
+
+  // validate GET query parameter for ordering
+  let order = 'ASC'; // default
+  if (req.query.hasOwnProperty('order') && req.query.order.toUpperCase() === 'DESC') {
+    order = 'DESC';
+  };
+
   // find all products
   // be sure to include its associated Category and Tag data
   let product_all;
   try {
     product_all = await Product.findAll({
+      order: [
+        ['product_name', order],
+        [Category, 'category_name', order],
+        [Tag, 'tag_name', order],
+      ],
       include: [{
         model: Category,
         // required: true
